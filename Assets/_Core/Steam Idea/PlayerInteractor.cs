@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using DW;
 
 interface IInteractable
 {
@@ -23,7 +24,7 @@ public class PlayerInteractor : MonoBehaviour
     private bool canInteract = true;
     private bool isInteracting = false;
     private IInteractable currentInteractable = null;
-    public FirstPersonController player;
+    public DW.FirstPersonController player;
 
     public Transform objectTargetLocation;
     private GameObject currentInspectedGO;
