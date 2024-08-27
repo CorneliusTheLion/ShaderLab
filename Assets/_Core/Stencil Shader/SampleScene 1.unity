@@ -185,7 +185,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f21723fba45cbf34a93ee68c8d7b55aa, type: 2}
+  - {fileID: 2100000, guid: 24ed299a94e84fb4faee874fdb5195cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 426013975}
   - component: {fileID: 426013974}
   - component: {fileID: 426013973}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 445149288}
   - component: {fileID: 445149287}
   - component: {fileID: 445149286}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 595059383}
   - component: {fileID: 595059382}
   - component: {fileID: 595059381}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +817,7 @@ GameObject:
   - component: {fileID: 670255484}
   - component: {fileID: 670255483}
   - component: {fileID: 670255482}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +923,7 @@ GameObject:
   - component: {fileID: 673670043}
   - component: {fileID: 673670042}
   - component: {fileID: 673670041}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1028,7 +1028,7 @@ GameObject:
   - component: {fileID: 914993721}
   - component: {fileID: 914993720}
   - component: {fileID: 914993719}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1183,7 +1183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 24ed299a94e84fb4faee874fdb5195cf, type: 2}
+  - {fileID: 2100000, guid: f21723fba45cbf34a93ee68c8d7b55aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1222,8 +1222,8 @@ Transform:
   m_GameObject: {fileID: 930426862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 2.75, y: 1, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.6, z: 2}
+  m_LocalPosition: {x: 3.375, y: 1, z: 0}
+  m_LocalScale: {x: 4.1228995, y: 3.6648, z: 4.581}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1240,7 +1240,7 @@ GameObject:
   - component: {fileID: 1001832095}
   - component: {fileID: 1001832094}
   - component: {fileID: 1001832093}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1518,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 12857d306bf442f4085fc2e3d68412bc,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1547,7 +1547,7 @@ GameObject:
   - component: {fileID: 1231929017}
   - component: {fileID: 1231929016}
   - component: {fileID: 1231929015}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1653,7 +1653,7 @@ GameObject:
   - component: {fileID: 1342948383}
   - component: {fileID: 1342948382}
   - component: {fileID: 1342948381}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1758,7 @@ GameObject:
   - component: {fileID: 1391822498}
   - component: {fileID: 1391822497}
   - component: {fileID: 1391822496}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2014,7 +2014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1489359667}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Stencil Layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2056,7 +2056,7 @@ GameObject:
   - component: {fileID: 1598314937}
   - component: {fileID: 1598314936}
   - component: {fileID: 1598314935}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2162,7 +2162,7 @@ GameObject:
   - component: {fileID: 1608504206}
   - component: {fileID: 1608504205}
   - component: {fileID: 1608504204}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2265,7 +2265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1618358970}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Stencil Layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2481,7 +2481,7 @@ GameObject:
   - component: {fileID: 1799526743}
   - component: {fileID: 1799526742}
   - component: {fileID: 1799526741}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2586,7 +2586,7 @@ GameObject:
   - component: {fileID: 1890620913}
   - component: {fileID: 1890620912}
   - component: {fileID: 1890620911}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2757,7 +2757,7 @@ GameObject:
   - component: {fileID: 2076441761}
   - component: {fileID: 2076441760}
   - component: {fileID: 2076441759}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,7 +2981,7 @@ GameObject:
   - component: {fileID: 2140523963}
   - component: {fileID: 2140523962}
   - component: {fileID: 2140523961}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Step
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3125,7 +3125,7 @@ GameObject:
   - component: {fileID: 1714882781622735875}
   - component: {fileID: 7233921737407494275}
   - component: {fileID: 1549510664197484135}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Suzanne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
