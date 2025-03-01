@@ -21,6 +21,7 @@ public class PlayerInteractor : MonoBehaviour
 
     public string interactTextPrefix = "Press <noparse>\"E</noparse> to <br>";
     public TextMeshProUGUI interactText;
+    public TextMeshProUGUI uninteractText;
 
     private bool canInteract = true;
     private bool isInteracting = false;
@@ -30,6 +31,7 @@ public class PlayerInteractor : MonoBehaviour
     public Transform objectTargetLocation;
     private GameObject currentInspectedGO;
     private Vector3 originalObjectPosition;
+    private Quaternion originalObjectRotation;
 
     public CinemachineVirtualCamera playerCam;
 
@@ -37,6 +39,7 @@ public class PlayerInteractor : MonoBehaviour
 
     private Vector2 _lookInput;
     public float distToFace = .5f;
+    public float rotationSpeed = 0.01f;
 
     void Update()
     {
@@ -59,7 +62,10 @@ public class PlayerInteractor : MonoBehaviour
                         player.ToggleMovement(false); // Disable player movement
                         player.ToggleCamera(false); // Disable camera movement
                         originalObjectPosition = hitInfo.collider.gameObject.transform.position; // Store original position
+                        originalObjectRotation = hitInfo.collider.gameObject.transform.rotation; // Store original position
                         TweenObjectToScreenCenter(hitInfo.collider.gameObject); // Tween object to screen center
+                        interactText.text = "";
+                        uninteractText.text = "Press E to exit";
                     }
                 }
                 else
@@ -78,6 +84,11 @@ public class PlayerInteractor : MonoBehaviour
                 player.ToggleMovement(true); // Enable player movement
                 player.ToggleCamera(true); // Enable camera movement
                 TweenObjectBack(currentInspectedGO); // Tween object back to its original position
+                uninteractText.text = "";
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                RecenterInteractedObject();
             }
             else
             {
@@ -94,14 +105,22 @@ public class PlayerInteractor : MonoBehaviour
             _lookInput.x = player.playerInputActions.Player.MouseX.ReadValue<float>();
             _lookInput.y = player.playerInputActions.Player.MouseY.ReadValue<float>();
 
-            float rotationSpeed = 0.01f; // Reduced sensitivity
-            float maxRotationAngle = 5f;
+            float maxRotationAngle = 20f;
 
             Vector3 currentRotation = currentInspectedGO.transform.localEulerAngles;
-            float newRotationX = Mathf.Clamp(currentRotation.x - _lookInput.y * rotationSpeed, -maxRotationAngle, maxRotationAngle);
-            float newRotationY = Mathf.Clamp(currentRotation.y + _lookInput.x * rotationSpeed, -maxRotationAngle, maxRotationAngle);
+            float newRotationX = Mathf.Clamp(currentRotation.x - _lookInput.y * rotationSpeed, currentRotation.x - maxRotationAngle, currentRotation.x + maxRotationAngle);
+            float newRotationY = Mathf.Clamp(currentRotation.y + _lookInput.x * rotationSpeed, currentRotation.y - maxRotationAngle, currentRotation.y + maxRotationAngle);
 
             currentInspectedGO.transform.localEulerAngles = Vector3.Lerp(currentRotation, new Vector3(newRotationX, newRotationY, currentRotation.z), Time.deltaTime * 5f);
+        }
+    }
+
+    private void RecenterInteractedObject()
+    {
+        if (currentInspectedGO != null)
+        {
+            //currentInspectedGO.transform.DOLocalRotate(Vector3.zero, 0.5f).SetEase(Ease.OutBack);
+            currentInspectedGO.transform.DOLookAt(playerCam.transform.position, 0.5f).SetEase(Ease.OutBack); // Make the object look at the player's camera
         }
     }
 
@@ -118,6 +137,7 @@ public class PlayerInteractor : MonoBehaviour
         if (target != null)
         {
             target.transform.DOMove(originalObjectPosition, 0.5f).SetEase(Ease.OutBack);
+            target.transform.DORotate(originalObjectRotation.eulerAngles, 0.5f).SetEase(Ease.OutBack);
         }
     }
 
