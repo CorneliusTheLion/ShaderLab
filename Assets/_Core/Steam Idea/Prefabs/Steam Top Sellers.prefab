@@ -155,23 +155,23 @@ MonoBehaviour:
   stringToGet: top_sellers
   gamesOnDisplay:
   - {fileID: 4017441112513844866}
-  - {fileID: 5014749978324550039}
-  - {fileID: 6875947310701956786}
-  - {fileID: 1196788079730570612}
   - {fileID: 843873020270688699}
-  - {fileID: 7256360288351217517}
-  - {fileID: 1543278918823233494}
-  - {fileID: 8504851551045372617}
   - {fileID: 4365587557446224432}
-  - {fileID: 5305220670116083070}
-  - {fileID: 5855206480129681329}
   - {fileID: 2345704458872847258}
-  - {fileID: 6148499411429459759}
-  - {fileID: 4707745458310328072}
-  - {fileID: 7091322869263530793}
   - {fileID: 2052128061576359483}
+  - {fileID: 7256360288351217517}
+  - {fileID: 6148499411429459759}
+  - {fileID: 5014749978324550039}
+  - {fileID: 5305220670116083070}
   - {fileID: 4264009907569105659}
+  - {fileID: 6875947310701956786}
+  - {fileID: 1543278918823233494}
+  - {fileID: 4707745458310328072}
   - {fileID: 189152447067426247}
+  - {fileID: 8504851551045372617}
+  - {fileID: 7091322869263530793}
+  - {fileID: 1196788079730570612}
+  - {fileID: 5855206480129681329}
   - {fileID: 5081624494001447083}
 --- !u!1 &6446987894335467143
 GameObject:
@@ -290,8 +290,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Top Sellers
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: e4c72097b45d58e4fa133c845104f33a, type: 2}
+  m_sharedMaterial: {fileID: -3053066376769228235, guid: e4c72097b45d58e4fa133c845104f33a,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
