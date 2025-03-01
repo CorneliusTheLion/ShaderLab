@@ -11,7 +11,7 @@ namespace DW
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private CharacterController cc;
-        private FirstPersonInput playerInputActions;
+        public FirstPersonInput playerInputActions;
         public bool IsGrounded { get; private set; }
         [SerializeField] private CinemachineVirtualCamera playerCamera;
         [SerializeField] private float ySensitivity = 1.0f;
@@ -136,6 +136,10 @@ namespace DW
         public void ToggleMovement(bool enableMovement)
         {
             canMove = enableMovement;
+        }
+        public void ToggleCamera(bool enableCam)
+        {
+            canLook = enableCam;
         }
     }
 

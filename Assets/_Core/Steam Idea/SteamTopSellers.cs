@@ -45,7 +45,7 @@ public class SteamTopSellers : MonoBehaviour
                 {
                     int appId = (int)topSellers[i]["id"];
                     topSellingAppIds.Add(appId);
-                    Debug.Log("App id: " + appId.ToString());
+                    //Debug.Log("App id: " + appId.ToString());
                 }
 
                 // Step 3: Fetch and print game details for each App ID

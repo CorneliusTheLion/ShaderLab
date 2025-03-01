@@ -1,0 +1,7 @@
+Model Data: VHS 02
+
+Verts: 2.160
+Faces: 2.070
+Tris: 3.420
+
+Texture: 2048x2048

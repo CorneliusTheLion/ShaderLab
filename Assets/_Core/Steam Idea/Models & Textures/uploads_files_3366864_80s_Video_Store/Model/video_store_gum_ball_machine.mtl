@@ -1,0 +1,28 @@
+# Blender MTL File: 'video_store_gum_ball_machine.blend'
+# Material Count: 2
+
+newmtl FrontColor
+Ns 100.000000
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd video_store_gum_ball_machine__color.png
+map_Bump video_store_gum_ball_machine__nmap.png
+map_Ks video_store_gum_ball_machine__rough.png
+
+newmtl FrontColor.001
+Ns 100.000000
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd video_store_gum_ball_machine_glass__color.png
+map_Bump video_store_gum_ball_machine_glass__nmap.png
+map_Ks video_store_gum_ball_machine_glass__rough.png

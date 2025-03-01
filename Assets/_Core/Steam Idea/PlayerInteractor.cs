@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using Cinemachine;
 using UnityEngine.InputSystem;
 using DW;
 
@@ -28,12 +29,18 @@ public class PlayerInteractor : MonoBehaviour
 
     public Transform objectTargetLocation;
     private GameObject currentInspectedGO;
+    private Vector3 originalObjectPosition;
+
+    public CinemachineVirtualCamera playerCam;
 
     public LayerMask interactRaycastMask;   //what the interact ray will hit
 
+    private Vector2 _lookInput;
+    public float distToFace = .5f;
+
     void Update()
     {
-        if(!isInteracting)
+        if (!isInteracting)
         {
             Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
             if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange, interactRaycastMask))
@@ -41,7 +48,7 @@ public class PlayerInteractor : MonoBehaviour
                 if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
                 {
                     //display "interact" on UI
-                    if(interactObj.GetInteractText(this) != "")
+                    if (interactObj.GetInteractText(this) != "")
                         interactText.text = interactTextPrefix + interactObj.GetInteractText(this);
 
                     if (Input.GetKeyDown(KeyCode.E))
@@ -49,7 +56,11 @@ public class PlayerInteractor : MonoBehaviour
                         interactObj.Interact(this);
                         isInteracting = true;
                         currentInteractable = interactObj;
-                    } 
+                        player.ToggleMovement(false); // Disable player movement
+                        player.ToggleCamera(false); // Disable camera movement
+                        originalObjectPosition = hitInfo.collider.gameObject.transform.position; // Store original position
+                        TweenObjectToScreenCenter(hitInfo.collider.gameObject); // Tween object to screen center
+                    }
                 }
                 else
                     interactText.text = "";
@@ -64,9 +75,50 @@ public class PlayerInteractor : MonoBehaviour
                 currentInteractable.DeInteract(this);
                 isInteracting = false;
                 currentInteractable = null;
+                player.ToggleMovement(true); // Enable player movement
+                player.ToggleCamera(true); // Enable camera movement
+                TweenObjectBack(currentInspectedGO); // Tween object back to its original position
+            }
+            else
+            {
+                RotateInteractedObject();
             }
         }
 
+    }
+
+    private void RotateInteractedObject()
+    {
+        if (currentInspectedGO != null)
+        {
+            _lookInput.x = player.playerInputActions.Player.MouseX.ReadValue<float>();
+            _lookInput.y = player.playerInputActions.Player.MouseY.ReadValue<float>();
+
+            float rotationSpeed = 0.01f; // Reduced sensitivity
+            float maxRotationAngle = 5f;
+
+            Vector3 currentRotation = currentInspectedGO.transform.localEulerAngles;
+            float newRotationX = Mathf.Clamp(currentRotation.x - _lookInput.y * rotationSpeed, -maxRotationAngle, maxRotationAngle);
+            float newRotationY = Mathf.Clamp(currentRotation.y + _lookInput.x * rotationSpeed, -maxRotationAngle, maxRotationAngle);
+
+            currentInspectedGO.transform.localEulerAngles = Vector3.Lerp(currentRotation, new Vector3(newRotationX, newRotationY, currentRotation.z), Time.deltaTime * 5f);
+        }
+    }
+
+    private void TweenObjectToScreenCenter(GameObject target)
+    {
+        currentInspectedGO = target;
+        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * distToFace; // Fixed distance in front of the camera
+        target.transform.DOMove(targetPosition, 0.5f).SetEase(Ease.OutBack);
+        target.transform.DOLookAt(playerCam.transform.position, 0.5f).SetEase(Ease.OutBack); // Make the object look at the player's camera
+    }
+
+    private void TweenObjectBack(GameObject target)
+    {
+        if (target != null)
+        {
+            target.transform.DOMove(originalObjectPosition, 0.5f).SetEase(Ease.OutBack);
+        }
     }
 
     public void TweenObjectIn(GameObject go)
@@ -82,8 +134,8 @@ public class PlayerInteractor : MonoBehaviour
     public void ToggleMovement(bool enableMovement)
     {
         player.ToggleMovement(enableMovement);
+        player.ToggleCamera(enableMovement);
     }
-
 
     private void OnDrawGizmos()
     {

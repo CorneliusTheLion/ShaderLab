@@ -1,0 +1,16 @@
+# Blender v2.78 (sub 0) OBJ File: 'video_store_carpet.blend'
+# www.blender.org
+mtllib video_store_carpet.mtl
+o Mesh1_Group1_Model
+v 0.000000 0.000000 -2.000000
+v 0.000000 0.000000 0.000000
+v 2.000000 0.000000 0.000000
+v 2.000000 0.000000 -2.000000
+vt 0.0050 0.0050
+vt 0.9950 0.0050
+vt 0.9950 0.9950
+vt 0.0050 0.9950
+vn 0.0000 1.0000 0.0000
+usemtl FrontColor
+s 1
+f 1/1/1 2/2/1 3/3/1 4/4/1

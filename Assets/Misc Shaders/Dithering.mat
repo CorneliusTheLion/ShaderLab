@@ -44,10 +44,10 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _threshold: 0.925
+    - _threshold: 1
     m_Colors:
-    - _BaseColor: {r: 0.15471682, g: 0.15471682, b: 0.15471682, a: 0.4392157}
-    - _Scroll_Velocity: {r: 1, g: 1, b: 0, a: 0}
+    - _BaseColor: {r: 0.20754719, g: 0, b: 0, a: 0.4392157}
+    - _Scroll_Velocity: {r: 6.51, g: 4.14, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3232838796106143775
 MonoBehaviour:

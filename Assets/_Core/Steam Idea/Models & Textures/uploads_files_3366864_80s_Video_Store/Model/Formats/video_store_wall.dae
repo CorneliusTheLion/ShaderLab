@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.78.0 commit date:2016-10-24, commit time:12:20, hash:e8299c8</authoring_tool>
+    </contributor>
+    <created>2021-10-28T18:41:39</created>
+    <modified>2021-10-28T18:41:39</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="video_store_wall__color_png" name="video_store_wall__color_png">
+      <init_from>/I:/3D_Asset_Packages/For%20Sale/Video_Store/Wall/Model/video_store_wall__color.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="FrontColor-effect">
+      <profile_COMMON>
+        <newparam sid="video_store_wall__color_png-surface">
+          <surface type="2D">
+            <init_from>video_store_wall__color_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="video_store_wall__color_png-sampler">
+          <sampler2D>
+            <source>video_store_wall__color_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="video_store_wall__color_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <specular>
+              <color sid="specular">1 1 1 1</color>
+            </specular>
+            <shininess>
+              <float sid="shininess">52</float>
+            </shininess>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="FrontColor-material" name="FrontColor">
+      <instance_effect url="#FrontColor-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Mesh1_Group2_Group1_Model-mesh" name="Mesh1_Group2_Group1_Model">
+      <mesh>
+        <source id="Mesh1_Group2_Group1_Model-mesh-positions">
+          <float_array id="Mesh1_Group2_Group1_Model-mesh-positions-array" count="78">2 2.128 10e-7 2 2.128 0.01900094 0 2.128 0.01900094 0 2.128 10e-7 2 2.148 10e-7 2 2.129 0.02000099 2 2.148 0.02000099 0 2.148 0.02000099 0 2.129 0.02000099 0 2.148 10e-7 2 0.12 0 2 2.128 10e-7 0 2.128 10e-7 0 0.12 0 2 0.04923695 0.01999998 2 0.119 0.01014196 0 0.119 0.01014196 0 0.04923695 0.01999998 0 0 0.01999998 2 0 0.01999998 2 0.12 0.008989989 0 0.12 0.008989989 0 0.12 0 2 0.12 0 2 0 0 0 0 0</float_array>
+          <technique_common>
+            <accessor source="#Mesh1_Group2_Group1_Model-mesh-positions-array" count="26" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Mesh1_Group2_Group1_Model-mesh-normals">
+          <float_array id="Mesh1_Group2_Group1_Model-mesh-normals-array" count="42">0 -1 0 1 0 0 0 0 1 -1 0 0 0 -0.7071325 0.7070811 0 -4.98008e-7 1 0 -4.98008e-7 1 0 0.4777889 0.8784748 0 0.07013118 0.9975378 0 0.07013118 0.9975378 0 0.9367984 0.3498698 0 0.4778 0.8784688 0 1 0 0 0.9367949 0.3498792</float_array>
+          <technique_common>
+            <accessor source="#Mesh1_Group2_Group1_Model-mesh-normals-array" count="14" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Mesh1_Group2_Group1_Model-mesh-map-0">
+          <float_array id="Mesh1_Group2_Group1_Model-mesh-map-0-array" count="180">0.957293 0.004999995 0.966077 0.929593 0.966077 0.004999995 0.939524 0.959303 0.939987 0.968549 0.939524 0.968086 0.948771 0.968549 0.939987 0.968549 0.948771 0.959303 0.985392 0.929593 0.976609 0.004999995 0.976609 0.929593 0.959303 0.959303 0.959303 0.968549 0.968087 0.959303 0.968087 0.959303 0.968549 0.968549 0.968549 0.959765 0.956831 0.929593 0.957293 0.004999995 0.956831 0.004999995 0.004999995 0.004999995 0.933291 0.929593 0.933291 0.004999995 0.929593 0.994538 0.004999995 0.962287 0.929593 0.962287 0.004999995 0.962287 0.929593 0.939524 0.929593 0.962287 0.946685 0.929593 0.946153 0.004999995 0.946685 0.004999995 0.946153 0.004999995 0.941997 0.929593 0.941997 0.004999995 0.962287 0.94877 0.995 0.943681 0.994538 0.944213 0.939524 0.94877 0.939524 0.939524 0.962287 0.94877 0.995 0.939524 0.995 0.943681 0.939524 0.939524 0.995 0.979081 0.972238 0.979081 0.995 0.988327 0.939524 0.984171 0.972238 0.979081 0.939987 0.983638 0.939524 0.988327 0.995 0.988327 0.939524 0.984171 0.957293 0.004999995 0.957293 0.929593 0.966077 0.929593 0.939524 0.959303 0.948771 0.959303 0.939987 0.968549 0.985392 0.929593 0.985392 0.004999995 0.976609 0.004999995 0.968087 0.959303 0.959303 0.968549 0.968549 0.968549 0.956831 0.929593 0.957293 0.929593 0.957293 0.004999995 0.004999995 0.004999995 0.004999995 0.929593 0.933291 0.929593 0.929593 0.994538 0.004999995 0.994538 0.004999995 0.962287 0.004999995 0.962287 0.004999995 0.939524 0.929593 0.939524 0.946685 0.929593 0.946153 0.929593 0.946153 0.004999995 0.946153 0.004999995 0.946153 0.929593 0.941997 0.929593 0.962287 0.94877 0.939524 0.939524 0.995 0.943681 0.939524 0.984171 0.995 0.988327 0.972238 0.979081</float_array>
+          <technique_common>
+            <accessor source="#Mesh1_Group2_Group1_Model-mesh-map-0-array" count="90" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Mesh1_Group2_Group1_Model-mesh-vertices">
+          <input semantic="POSITION" source="#Mesh1_Group2_Group1_Model-mesh-positions"/>
+        </vertices>
+        <polylist material="FrontColor-material" count="30">
+          <input semantic="VERTEX" source="#Mesh1_Group2_Group1_Model-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Mesh1_Group2_Group1_Model-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Mesh1_Group2_Group1_Model-mesh-map-0" offset="2" set="0"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>1 0 0 3 0 1 0 0 2 0 1 3 5 1 4 1 1 5 6 1 6 5 1 7 4 1 8 8 2 9 6 2 10 7 2 11 7 3 12 9 3 13 8 3 14 8 3 15 3 3 16 2 3 17 8 4 18 1 4 19 5 4 20 11 5 21 13 6 22 10 6 23 15 7 24 17 8 25 14 9 26 17 8 27 19 2 28 14 9 29 15 7 30 21 10 31 16 11 32 21 10 33 23 12 34 22 12 35 14 1 36 20 1 37 15 1 38 19 1 39 24 1 40 14 1 41 23 1 42 20 1 43 24 1 44 18 3 45 17 3 46 25 3 47 21 3 48 17 3 49 16 3 50 22 3 51 25 3 52 21 3 53 1 0 54 2 0 55 3 0 56 0 1 57 4 1 58 5 1 59 8 2 60 5 2 61 6 2 62 8 3 63 9 3 64 3 3 65 8 4 66 2 4 67 1 4 68 11 5 69 12 5 70 13 6 71 15 7 72 16 11 73 17 8 74 17 8 75 18 2 76 19 2 77 15 7 78 20 13 79 21 10 80 21 10 81 20 13 82 23 12 83 14 1 84 24 1 85 20 1 86 21 3 87 25 3 88 17 3 89</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Mesh1_Group2_Group1_Model" name="Mesh1_Group2_Group1_Model" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 -1.62921e-7 -1 0 0 1 -1.62921e-7 0 0 0 0 1</matrix>
+        <instance_geometry url="#Mesh1_Group2_Group1_Model-mesh" name="Mesh1_Group2_Group1_Model">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="FrontColor-material" target="#FrontColor-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>
