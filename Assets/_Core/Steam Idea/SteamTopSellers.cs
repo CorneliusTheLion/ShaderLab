@@ -45,7 +45,6 @@ public class SteamTopSellers : MonoBehaviour
                 {
                     int appId = (int)topSellers[i]["id"];
                     topSellingAppIds.Add(appId);
-                    //Debug.Log("App id: " + appId.ToString());
                 }
 
                 // Step 3: Fetch and print game details for each App ID
@@ -80,26 +79,35 @@ public class SteamTopSellers : MonoBehaviour
                     string name = gameData["name"].ToString();
                     string description = gameData["short_description"].ToString();
                     string imageUrl = gameData["header_image"].ToString();
+                    string originalPrice = gameData["price_overview"]?["initial_formatted"]?.ToString() ?? "N/A";
+                    string currentPrice = gameData["price_overview"]?["final_formatted"]?.ToString() ?? "N/A";
+                    string steamLink = $"steam://store/{appId}";
 
-                    //GameObject newGame = GameObject.Instantiate(gamePrefab, parentTransform);
-                    //newGame.GetComponent<VideoGameCase>().PopulateGameCaseText(name, description);
+                    gamesOnDisplay[gameIterator].PopulateGameCaseText(name, description, originalPrice, currentPrice, steamLink);
 
-                    gamesOnDisplay[gameIterator].PopulateGameCaseText(name, description);
-
-
-                    // Print the game details
-                    //Debug.Log($"Game: {name}");
-                    //Debug.Log($"Description: {description}");
-                    //Debug.Log($"Image URL: {imageUrl}");
-
-                    // Optionally, you can load the image and display it in Unity
+                    // Load the header image and display it in Unity
                     StartCoroutine(LoadImage(imageUrl, gamesOnDisplay[gameIterator]));
+
+                    // Load gallery images
+                    JArray screenshots = (JArray)gameData["screenshots"];
+                    foreach (var screenshot in screenshots)
+                    {
+                        string screenshotUrl = screenshot["path_thumbnail"].ToString();
+                        StartCoroutine(LoadGalleryImage(screenshotUrl, gamesOnDisplay[gameIterator]));
+                    }
+                }
+                else
+                {
+                    // Disable the game object if the game details fail to load
+                    gamesOnDisplay[gameIterator].gameObject.SetActive(false);
                 }
             }
         }
         catch (HttpRequestException e)
         {
             Debug.LogError($"Request error for App ID {appId}: {e.Message}");
+            // Disable the game object if the request fails
+            gamesOnDisplay[gameIterator].gameObject.SetActive(false);
         }
     }
 
@@ -110,20 +118,29 @@ public class SteamTopSellers : MonoBehaviour
             yield return www;
             if (www.texture != null)
             {
-                // Create a new GameObject to display the image
-                //GameObject imageObject = new GameObject("GameImage");
-                //SpriteRenderer renderer = imageObject.AddComponent<SpriteRenderer>();
-                //renderer.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f));
-
-
                 newGame.PopulateGameCaseImage(Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f)));
-
-                // Optionally, position the image in the scene
-                //imageObject.transform.position = new Vector3(0, 0, 0); // Adjust as needed
             }
             else
             {
                 Debug.LogError("Failed to load image.");
+                // Disable the game object if the image fails to load
+                newGame.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private IEnumerator LoadGalleryImage(string imageUrl, VideoGameCase newGame)
+    {
+        using (WWW www = new WWW(imageUrl))
+        {
+            yield return www;
+            if (www.texture != null)
+            {
+                newGame.AddGalleryImage(Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f)));
+            }
+            else
+            {
+                Debug.LogError("Failed to load gallery image.");
             }
         }
     }

@@ -62,7 +62,7 @@ public class PlayerInteractor : MonoBehaviour
                         player.ToggleMovement(false); // Disable player movement
                         player.ToggleCamera(false); // Disable camera movement
                         originalObjectPosition = hitInfo.collider.gameObject.transform.position; // Store original position
-                        originalObjectRotation = hitInfo.collider.gameObject.transform.rotation; // Store original position
+                        originalObjectRotation = hitInfo.collider.gameObject.transform.rotation; // Store original rotation
                         TweenObjectToScreenCenter(hitInfo.collider.gameObject); // Tween object to screen center
                         interactText.text = "";
                         uninteractText.text = "Press E to exit";
@@ -90,12 +90,32 @@ public class PlayerInteractor : MonoBehaviour
             {
                 RecenterInteractedObject();
             }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                if (currentInspectedGO != null)
+                {
+                    currentInspectedGO.GetComponent<VideoGameCase>().ShowNextImage();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (currentInspectedGO != null)
+                {
+                    currentInspectedGO.GetComponent<VideoGameCase>().ShowPreviousImage();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.G))
+            {
+                if (currentInspectedGO != null)
+                {
+                    currentInspectedGO.GetComponent<VideoGameCase>().OpenSteamLink();
+                }
+            }
             else
             {
                 RotateInteractedObject();
             }
         }
-
     }
 
     private void RotateInteractedObject()
@@ -119,7 +139,6 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (currentInspectedGO != null)
         {
-            //currentInspectedGO.transform.DOLocalRotate(Vector3.zero, 0.5f).SetEase(Ease.OutBack);
             currentInspectedGO.transform.DOLookAt(playerCam.transform.position, 0.5f).SetEase(Ease.OutBack); // Make the object look at the player's camera
         }
     }
