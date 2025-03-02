@@ -173,6 +173,8 @@ MonoBehaviour:
   - {fileID: 1196788079730570612}
   - {fileID: 5855206480129681329}
   - {fileID: 5081624494001447083}
+  displayCaseTitle: STEAM GAMES
+  displayCaseText: {fileID: 1669131177066381712}
 --- !u!1 &6446987894335467143
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using System.IO;
+using TMPro;
 
 public class SteamTopSellers : MonoBehaviour
 {
@@ -14,13 +16,72 @@ public class SteamTopSellers : MonoBehaviour
     public GameObject gamePrefab;
     public Transform parentTransform;
     public string stringToGet = "top_sellers";
+    
 
     public VideoGameCase[] gamesOnDisplay;
     private int gameIterator = 0;
 
+    public string displayCaseTitle = "STEAM GAMES";
+    public TextMeshProUGUI displayCaseText;
+
     void Start()
     {
+        //LoadCachedGames();
         GetTopSellingGames();
+        displayCaseText.text = displayCaseTitle;
+    }
+
+    private void LoadCachedGames()
+    {
+        for (int i = 0; i < gamesOnDisplay.Length; i++)
+        {
+            string gameDataKey = $"GameData_{i}";
+            if (PlayerPrefs.HasKey(gameDataKey))
+            {
+                string gameDataJson = PlayerPrefs.GetString(gameDataKey);
+                JObject gameData = JObject.Parse(gameDataJson);
+                string name = gameData["name"].ToString();
+                string description = gameData["description"].ToString();
+                string originalPrice = gameData["originalPrice"].ToString();
+                string currentPrice = gameData["currentPrice"].ToString();
+                string steamLink = gameData["steamLink"].ToString();
+
+                gamesOnDisplay[i].PopulateGameCaseText(name, description, originalPrice, currentPrice, steamLink);
+
+                // Load cached images
+                LoadCachedImages(i);
+            }
+        }
+    }
+
+    private void LoadCachedImages(int gameIndex)
+    {
+        string imagePath = Path.Combine(Application.persistentDataPath, $"Game_{gameIndex}_Image.png");
+        if (File.Exists(imagePath))
+        {
+            byte[] imageData = File.ReadAllBytes(imagePath);
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(imageData);
+            gamesOnDisplay[gameIndex].PopulateGameCaseImage(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
+        }
+
+        int galleryIndex = 0;
+        while (true)
+        {
+            string galleryImagePath = Path.Combine(Application.persistentDataPath, $"Game_{gameIndex}_Gallery_{galleryIndex}.png");
+            if (File.Exists(galleryImagePath))
+            {
+                byte[] imageData = File.ReadAllBytes(galleryImagePath);
+                Texture2D texture = new Texture2D(2, 2);
+                texture.LoadImage(imageData);
+                gamesOnDisplay[gameIndex].AddGalleryImage(Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f)));
+                galleryIndex++;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     public async void GetTopSellingGames()
@@ -85,15 +146,28 @@ public class SteamTopSellers : MonoBehaviour
 
                     gamesOnDisplay[gameIterator].PopulateGameCaseText(name, description, originalPrice, currentPrice, steamLink);
 
+                    // Cache game data
+                    JObject gameDataJson = new JObject
+                    {
+                        ["name"] = name,
+                        ["description"] = description,
+                        ["originalPrice"] = originalPrice,
+                        ["currentPrice"] = currentPrice,
+                        ["steamLink"] = steamLink
+                    };
+                    PlayerPrefs.SetString($"GameData_{gameIterator}", gameDataJson.ToString());
+
                     // Load the header image and display it in Unity
-                    StartCoroutine(LoadImage(imageUrl, gamesOnDisplay[gameIterator]));
+                    StartCoroutine(LoadImage(imageUrl, gamesOnDisplay[gameIterator], gameIterator));
 
                     // Load gallery images
                     JArray screenshots = (JArray)gameData["screenshots"];
+                    int galleryIndex = 0;
                     foreach (var screenshot in screenshots)
                     {
                         string screenshotUrl = screenshot["path_thumbnail"].ToString();
-                        StartCoroutine(LoadGalleryImage(screenshotUrl, gamesOnDisplay[gameIterator]));
+                        StartCoroutine(LoadGalleryImage(screenshotUrl, gamesOnDisplay[gameIterator], gameIterator, galleryIndex));
+                        galleryIndex++;
                     }
                 }
                 else
@@ -111,7 +185,7 @@ public class SteamTopSellers : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadImage(string imageUrl, VideoGameCase newGame)
+    private IEnumerator LoadImage(string imageUrl, VideoGameCase newGame, int gameIndex)
     {
         using (WWW www = new WWW(imageUrl))
         {
@@ -119,6 +193,11 @@ public class SteamTopSellers : MonoBehaviour
             if (www.texture != null)
             {
                 newGame.PopulateGameCaseImage(Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f)));
+
+                // Cache the image
+                byte[] imageData = www.texture.EncodeToPNG();
+                string imagePath = Path.Combine(Application.persistentDataPath, $"Game_{gameIndex}_Image.png");
+                File.WriteAllBytes(imagePath, imageData);
             }
             else
             {
@@ -129,7 +208,7 @@ public class SteamTopSellers : MonoBehaviour
         }
     }
 
-    private IEnumerator LoadGalleryImage(string imageUrl, VideoGameCase newGame)
+    private IEnumerator LoadGalleryImage(string imageUrl, VideoGameCase newGame, int gameIndex, int galleryIndex)
     {
         using (WWW www = new WWW(imageUrl))
         {
@@ -137,6 +216,11 @@ public class SteamTopSellers : MonoBehaviour
             if (www.texture != null)
             {
                 newGame.AddGalleryImage(Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0.5f, 0.5f)));
+
+                // Cache the gallery image
+                byte[] imageData = www.texture.EncodeToPNG();
+                string galleryImagePath = Path.Combine(Application.persistentDataPath, $"Game_{gameIndex}_Gallery_{galleryIndex}.png");
+                File.WriteAllBytes(galleryImagePath, imageData);
             }
             else
             {

@@ -41,6 +41,10 @@ public class PlayerInteractor : MonoBehaviour
     public float distToFace = .5f;
     public float rotationSpeed = 0.01f;
 
+    public AudioClip pickUpSFX;
+    public AudioClip putBackSFX;
+    public AudioSource audioSource;
+
     void Update()
     {
         if (!isInteracting)
@@ -65,7 +69,8 @@ public class PlayerInteractor : MonoBehaviour
                         originalObjectRotation = hitInfo.collider.gameObject.transform.rotation; // Store original rotation
                         TweenObjectToScreenCenter(hitInfo.collider.gameObject); // Tween object to screen center
                         interactText.text = "";
-                        uninteractText.text = "Press E to exit";
+                        uninteractText.text = "Press E to exit; Press G to open in Steam!";
+                        audioSource.PlayOneShot(pickUpSFX);
                     }
                 }
                 else
@@ -85,6 +90,7 @@ public class PlayerInteractor : MonoBehaviour
                 player.ToggleCamera(true); // Enable camera movement
                 TweenObjectBack(currentInspectedGO); // Tween object back to its original position
                 uninteractText.text = "";
+                audioSource.PlayOneShot(putBackSFX);
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
